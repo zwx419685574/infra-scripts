@@ -1,2 +1,2 @@
-# some-userful-shell-scripts
+# shell-scripts
 some userful  shell-scripts
