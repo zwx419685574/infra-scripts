@@ -1,0 +1,17 @@
+## https://www.cnblogs.com/ybinshi/p/15555866.html
+
+docker run -p 3306:3306 --restart=always --name mysql -v /usr/local/mysql/conf:/etc/mysql/conf.d \
+-v /usr/local/mysql/logs:/logs -v /usr/local/mysql/data:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=123456 -d mysql
+
+## 设置
+1.设置能远程登录mysql
+use mysql
+2.查看用户
+select host,user from user;
+3.设置root用户在任何地方进行远程登录，并具有所有库任何操作权限
+grant all privileges on *.*  to 'root'@'%' ;
+4.修改用户的密码和加密方式
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '密码';
+5.刷新权限
+FLUSH PRIVILEGES;
