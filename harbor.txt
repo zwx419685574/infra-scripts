@@ -1,2 +1,7 @@
 ## https://www.shuzhiduo.com/A/A2dm8ag75e/
+## 备用 https://www.cnblogs.com/mmworld/p/16013408.html
+
+版本信息 
+##   https://github.com/goharbor/harbor/releases 
+harbor 最新版本 2.4.3 
 
