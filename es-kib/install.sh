@@ -5,7 +5,7 @@
   添加: vm.max_map_count = 655360
   刷新配置：sysctl -p
 
-2 es
+2 单节点es
 docker run --name elasticsearch --privileged=true -p 9200:9200 -p 9300:9300 \
 -e  "discovery.type=single-node" \
 -e ES_JAVA_OPTS="-Xms64m -Xmx512m" \
