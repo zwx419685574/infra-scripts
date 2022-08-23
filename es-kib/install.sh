@@ -26,7 +26,6 @@ docker run --name elasticsearch --privileged=true -p 9200:9200 -p 9300:9300 \
 
 3 kibana
 docker run --name kibana --restart=always \
--e ELASTICSEARCH_HOSTS=http://127.0.0.1:9200 \
 -v /mnt/kibdata/config:/usr/share/kibana/config \
 -v /mnt/kibdata/logs:/usr/share/kibana/logs \
 -p 5601:5601 \
