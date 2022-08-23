@@ -54,8 +54,10 @@ filebeat.inputs:
     app_id: bussinesslog
   # 将新增的字段放在顶级
   fields_under_root: true 
-output.es:
-  hosts: ["192.168.12.27:5044"]
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+  username: "elastic"
+  password: "elastic"
   
   
   
