@@ -19,7 +19,12 @@ docker run --name elasticsearch --privileged=true -p 9200:9200 -p 9300:9300 \
 # 配置IK分词器 下载地址 https://github.com/medcl/elasticsearch-analysis-ik/releases
 
 3 kibana
-
+docker run --name kibana --restart=always \
+-e ELASTICSEARCH_HOSTS=http://127.0.0.1:9200 \
+-v /mnt/kibdata/config:/usr/share/kibana/config \
+-v /mnt/kibdata/logs:/usr/share/kibana/logs \
+-p 5601:5601 \
+-d kibana:8.2.0
 
 4 filebeat
 wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.2.0-linux-x86_64.tar.gz
