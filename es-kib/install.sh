@@ -6,6 +6,12 @@
   刷新配置：sysctl -p
 
 2 单节点es
+启动前 要更改权限和所属组 否则报错
+
+chown -R 1000:1000 /mnt/esdata/data
+chmod -R 777 /mnt/esdata/data
+chmod -R 777 /mnt/esdata/logs
+
 docker run --name elasticsearch --privileged=true -p 9200:9200 -p 9300:9300 \
 -e  "discovery.type=single-node" \
 -e ES_JAVA_OPTS="-Xms64m -Xmx512m" \
