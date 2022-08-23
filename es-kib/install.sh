@@ -9,7 +9,7 @@
 docker run --name elasticsearch --privileged=true -p 9200:9200 -p 9300:9300 \
 -e  "discovery.type=single-node" \
 -e ES_JAVA_OPTS="-Xms64m -Xmx512m" \
--v /mnt/esdata/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
+-v /mnt/esdata/config:/usr/share/elasticsearch/config \
 -v /mnt/esdata/data:/usr/share/elasticsearch/data \
 -v  /mnt/esdata/plugins:/usr/share/elasticsearch/plugins \
 -d elasticsearch:8.2.0 
