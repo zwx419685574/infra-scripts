@@ -1,4 +1,4 @@
-# 首先附上 参考连接  https://blog.csdn.net/weixin_42176639/article/details/125340884
+# 首先附上 参考连接  https://www.pudn.com/news/62b497bb405aad31f7f7122c.html
 # 链接中 没有映射对应 数据和配置文件，下面映射了 参考
 
 1 root用户下修改vim /etc/sysctl.conf
@@ -15,6 +15,7 @@ docker run --name elasticsearch --privileged=true -p 9200:9200 -p 9300:9300 \
 -d elasticsearch:8.2.0 
 
 # 根据参考链接配置es登录用户名密码
+# 配置IK分词器 下载地址 https://github.com/medcl/elasticsearch-analysis-ik/releases
 
 3 kibana
 
