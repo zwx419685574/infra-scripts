@@ -12,7 +12,7 @@ docker run --name elasticsearch --privileged=true -p 9200:9200 -p 9300:9300 \
 -v /mnt/esdata/config:/usr/share/elasticsearch/config \
 -v /mnt/esdata/data:/usr/share/elasticsearch/data \
 -v /mnt/esdata/plugins:/usr/share/elasticsearch/plugins \
--v /mnt/esdata/logs:/usr/share/elasticsearch/logs
+-v /mnt/esdata/logs:/usr/share/elasticsearch/logs \
 -d elasticsearch:8.2.0 
 
 # 根据参考链接配置es登录用户名密码
