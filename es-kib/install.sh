@@ -23,7 +23,7 @@ docker run --name elasticsearch --privileged=true -p 9200:9200 -p 9300:9300 \
 
 # 根据参考链接配置es登录用户名密码
 # 配置IK分词器 下载地址 https://github.com/medcl/elasticsearch-analysis-ik/releases
-
+# ELK Kibana 8.3.2登录认证 : https://www.cnblogs.com/feifei6779/p/16524927.html
 3 kibana
 docker run --name kibana --restart=always \
 -v /mnt/kibdata/config:/usr/share/kibana/config \
