@@ -1,0 +1,7 @@
+# 添加
+firewall-cmd --zone=public --add-port=5601/tcp --permanent
+# 移除
+firewall-cmd --zone=public --remove-port=33060/tcp --permanent
+# 生效
+firewall-cmd --reload 
+
