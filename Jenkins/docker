@@ -4,3 +4,6 @@ docker pull jenkins/jenkins:2.346.3
 docker run -itd -p 8080:8080 -p 50000:50000  --restart always -v /home/jenkins:/var/jenkins_home --name jenkins  jenkins/jenkins:2.346.3
 
 
+-v /opt/apache-maven-3.6.3:/usr/local/maven  # 挂载Maven目录
+-v /etc/localtime:/etc/localtime:ro          # 保持本地宿主机时间一致
+
