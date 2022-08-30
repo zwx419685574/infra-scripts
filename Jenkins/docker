@@ -5,6 +5,7 @@ docker run -itd -p 8080:8080 -p 50000:50000  --restart always -v /home/jenkins:/
 -v /usr/local/soft/apache-maven-3.8.3:/home/maven3.8 \
 -v /usr/local/soft/jdk1.8.0_301:/home/java1.8 \
 -v /etc/localtime:/etc/localtime:ro \
+-v /home/mvn-repo:/path/to/local/repo \
 --name jenkins  jenkins/jenkins:2.346.3
 
 
