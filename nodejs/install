@@ -1,0 +1,19 @@
+# 二进制包安装 配环境变量即可 
+
+cd /opt ; ls 
+node-v14.15.2.tar.xz  
+
+tar -xf node-v14.15.2.tar.xz 
+mv node-v14.15.2.tar.xz node-v14.15.2
+
+cat >> /etc/profile <<EOF
+> export NODE_HOME=/home/node-v14.15.2
+> export PATH=$NODE_HOME/bin:$PATH
+> EOF
+
+source /etc/profile
+
+npm -v ; node -v
+
+
+npm install yarn -y
