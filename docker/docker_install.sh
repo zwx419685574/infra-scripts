@@ -10,5 +10,7 @@ docker info | grep 'Docker Root Dir' 查看是否是更改后的路径
 
 vi /usr/lib/systemd/system/docker.service
 修改 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph /mnt/docker
+
+systemctl daemon-reload
 systemctl restart docker
 
