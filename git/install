@@ -1,0 +1,17 @@
+
+# git 编译安装
+
+yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker
+
+cd /opt; ls 
+git-1.8.3.1.tar.gz 
+
+tar -zxvf git-1.8.3.1.tar.gz 
+
+cd git
+make prefix=/usr/local/git all
+make prefix=/usr/local/git install
+
+ln -s /usr/local/git/bin/git /usr/bin/git
+
+git --version
