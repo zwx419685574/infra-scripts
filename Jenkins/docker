@@ -1,4 +1,7 @@
 # https://www.cnblogs.com/hanease/p/15690225.html
+
+# jenkins plugins http://updates.jenkins-ci.org/download/plugins/
+
 docker pull jenkins/jenkins:2.346.3
 
 chown -R 1000:1000 /home/jenkins
