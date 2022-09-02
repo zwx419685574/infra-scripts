@@ -18,3 +18,7 @@ docker run -itd -p 8080:8080 -p 50000:50000  --restart always -v /home/jenkins:/
 # root用户进入容器
 docker exec -it --user root <container id> bash
 
+# Jenkins迁移 （node节点的流水线丢失 查原因）
+
+JENKINS_HOME 所有的文件 copy到新的 Jenkins_home
+
