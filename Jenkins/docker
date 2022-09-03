@@ -11,6 +11,7 @@ docker run -itd -p 8080:8080 -p 50000:50000  --restart always -v /home/jenkins:/
 -v /usr/local/soft/jdk1.8.0_301:/usr/local/soft/jdk1.8.0_301 \
 -v /etc/localtime:/etc/localtime:ro \
 -v /home/mvn-repo:/path/to/local/repo \
+-v /home/node-v14.15.2:/home/node-v14.15.2 \
 --name jenkins  jenkins/jenkins:2.303.2
 
 -v /usr/local/soft/apache-maven-3.8.3:/home/maven3.8  # 挂载Maven目录
