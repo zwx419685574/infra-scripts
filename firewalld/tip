@@ -1,8 +1,10 @@
-# 添加
+# iptables 添加
 firewall-cmd --zone=public --add-port=5601/tcp --permanent
-# 移除
+# iptables 移除
 firewall-cmd --zone=public --remove-port=33060/tcp --permanent
-# 生效
+# iptables 生效
 firewall-cmd --reload 
 
 systemctl status firewalld
+
+iptables -L -n # 查看开放或者禁止端口
