@@ -5,3 +5,4 @@ firewall-cmd --zone=public --remove-port=33060/tcp --permanent
 # 生效
 firewall-cmd --reload 
 
+systemctl status firewalld
