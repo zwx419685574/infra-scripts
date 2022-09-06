@@ -19,7 +19,7 @@ docker run --name elasticsearch --privileged=true -p 9200:9200 -p 9300:9300 \
 -v /mnt/esdata/data:/usr/share/elasticsearch/data \
 -v /mnt/esdata/plugins:/usr/share/elasticsearch/plugins \
 -v /mnt/esdata/logs:/usr/share/elasticsearch/logs \
--d elasticsearch:8.2.0 
+-d elasticsearch:7.13.4
 
 # 根据参考链接配置es登录用户名密码
 docker exec -it elasticsearch /bin/bash 
@@ -32,23 +32,9 @@ docker run --name kibana --restart=always \
 -v /mnt/kibdata/config:/usr/share/kibana/config \
 -v /mnt/kibdata/logs:/usr/share/kibana/logs \
 -p 5601:5601 \
--d kibana:8.2.0
+-d kibana:7.13.4
 
-报错：
-  A Error: [config validation of [xpack.graph].enabled]: definition for this key is missing
-  解决：配置文件里添加
-  xpack.reporting.encryptionKey: "a_random_string"
-  xpack.security.encryptionKey: "something_at_least_32_characters"
-  
-  B Error: [config validation of [elasticsearch].username]: value of "elastic" is forbidden. 
-  This is a superuser account that cannot write to system indices that Kibana needs to function. Use a service account token instead.
-  解决：在es里添加普通用户 
       
-
-
-
-
-
 4 filebeat
 wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.2.0-linux-x86_64.tar.gz
 tar -xvf filebeat-8.2.0-linux-x86_64.tar.gz
