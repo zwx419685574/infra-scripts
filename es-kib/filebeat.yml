@@ -1,0 +1,49 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /app/logs/beforteen-admin/sys-error*.log
+  json.key_under_root: true
+  json.overwrite_keys: true  
+  tags: ["beforteen-admin-error"]
+ 
+- type: log
+  enabled: true
+  paths:
+    - /app/logs/beforteen-admin/sys-info*.log
+  json.key_under_root: true
+  json.overwrite_keys: true
+  tags: ["beforteen-admin-info"]
+
+filebeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+
+setup.template.settings:
+  index.number_of_shards: 1
+
+setup.template.enabled: false
+setup.template.name: "filebeat"
+setup.template.pattern: "filebeat-*"
+
+processors:
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+
+# 自定义ES的索引需要把ilm设置为false
+#setup.ilm.enabled: false
+
+#-------------------------- Elasticsearch output ------------------------------
+
+output.elasticsearch:
+  hosts: ["10.12.42.18:9200"]
+  username: "elastic"
+  password: "elastic"
+  #index: "beforteen-admin-%{[fields]}-*"
+  indices:
+    - index: "beforteen-admin-error-%{+yyyy.MM.dd}"
+      when.contains:
+        tags: "beforteen-admin-error"
+    - index: "beforteen-admin-info-%{+yyyy.MM.dd}"
+      when.contains: 
+        tags: "beforteen-admin-info"
