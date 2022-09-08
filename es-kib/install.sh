@@ -37,6 +37,8 @@ docker run --name kibana --restart=always \
 
       
 4 filebeat
+docker pull docker.elastic.co/beats/filebeat:7.13.4 
+ 
 wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.2.0-linux-x86_64.tar.gz
 tar -xvf filebeat-8.2.0-linux-x86_64.tar.gz
 # 进入根目录
