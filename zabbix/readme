@@ -1,1 +1,29 @@
 # 默认登录账户  Admin / zabbix
+
+# 版本查看 
+[root@localhost zabbix-server]# docker-compose ps 
+            Name                           Command               State                 Ports               
+-----------------------------------------------------------------------------------------------------------
+zabbix-server_mysql-server_1    docker-entrypoint.sh mysqld      Up      0.0.0.0:13306->3306/tcp, 33060/tcp
+zabbix-server_zabbix-agent_1    /sbin/tini -- /usr/bin/doc ...   Up      0.0.0.0:10050->10050/tcp          
+zabbix-server_zabbix-server_1   /usr/bin/tini -- /usr/bin/ ...   Up      0.0.0.0:10051->10051/tcp          
+zabbix-server_zabbix-web_1      docker-entrypoint.sh             Up      0.0.0.0:80->8080/tcp, 8443/tcp    
+
+[root@localhost zabbix-server]# docker exec -it zabbix-server_zabbix-server_1  /bin/bash 
+bash-4.4$ 
+bash-4.4$ zabbix_server -V
+zabbix_server (Zabbix) 6.2.2
+Revision 3545586 29 August 2022, compilation time: Sep  8 2022 15:20:44
+
+Copyright (C) 2022 Zabbix SIA
+License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it according to
+the license. There is NO WARRANTY, to the extent permitted by law.
+
+This product includes software developed by the OpenSSL Project
+for use in the OpenSSL Toolkit (http://www.openssl.org/).
+
+Compiled with OpenSSL 1.1.1k  FIPS 25 Mar 2021
+Running with OpenSSL 1.1.1k  FIPS 25 Mar 2021
+
+
