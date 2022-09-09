@@ -1,1 +1,69 @@
-## 
+version: '3.7'
+services:
+  mysql-server:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+      MYSQL_DATABASE: zabbix
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+      - "/home/zabbix-server/mysql:/var/lib/mysql"
+    ports:
+      - "13306:3306"
+    networks:
+      - zbx_net
+
+  zabbix-server:
+    image: zabbix/zabbix-server-mysql:centos-latest
+    environment:
+      DB_SERVER_HOST: mysql-server
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+    ports:
+      - "10051:10051"
+    depends_on:
+      - "mysql-server"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro 
+      - /home/zabbix-server/zabbix:/var/lib/zabbix
+    networks:
+      - zbx_net
+
+
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-mysql:latest
+    environment:
+      DB_SERVER_HOST: mysql-server
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+      PHP_TZ: Asia/Shanghai
+      ZBX_SERVER_HOST: zabbix-server
+    ports:
+      - 80:8080
+    depends_on:
+      - mysql-server
+      - zabbix-server    
+    networks:
+      - zbx_net
+
+  zabbix-agent:
+    image: zabbix/zabbix-agent:latest
+    environment:
+      ZBX_SERVER_HOST: zabbix-server
+    ports:
+     - "10050:10050"
+    depends_on:
+     - "zabbix-server"
+    networks:
+     - zbx_net
+
+networks:
+ zbx_net:
+#volumes:
+#  zabbix:
+
