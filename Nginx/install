@@ -8,7 +8,10 @@ nginx-1.22.0.tar.gz
 tar -zxvf nginx-1.22.0.tar.gz
 cd nginx-1.22.0
 
-./configure --prefix=/usr/local/nginx --with-http_ssl_module  --with-http_stub_status_module
+# 添加nginx用户
+useradd nginx -s /sbin/nologin -M
+
+./configure --prefix=/usr/local/nginx --user=nginx --group=nginx --with-http_ssl_module  --with-http_stub_status_module
 make && make install 
 
 
