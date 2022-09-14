@@ -1,6 +1,6 @@
 
 # 编译安装 
-yum -y install pcre-devel zlib-devel gcc gcc-c++ make 
+yum -y install pcre-devel zlib-devel gcc gcc-c++ make openssl openssl-devel
 
 cd /opt; ls 
 nginx-1.22.0.tar.gz
