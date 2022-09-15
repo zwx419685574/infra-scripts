@@ -1,5 +1,17 @@
 # docker run 
 
+
+prometheus
 docker run -itd --name prometheus -p 9090:9090 \
 -v /home/prom/prometheus.yml:/etc/prometheus/prometheus.yml \
 -v /etc/localtime:/etc/localtime:ro  prom/prometheus
+
+/prometheus $ prometheus --version 
+prometheus, version 2.37.1 (branch: HEAD, revision: 1ce2197e7f9e95089bfb95cb61762b5a89a8c0da)
+  build user:       root@3caaaea7ba87
+  build date:       20220912-12:42:39
+  go version:       go1.18.6
+  platform:         linux/amd64
+
+
+# granfana
