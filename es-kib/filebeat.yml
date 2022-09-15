@@ -1,3 +1,4 @@
+max_procs: 1
 filebeat.inputs:
 - type: log
   enabled: true
@@ -26,9 +27,10 @@ setup.template.enabled: false
 setup.template.name: "filebeat"
 setup.template.pattern: "filebeat-*"
 
-processors:
-  - add_cloud_metadata: ~
-  - add_docker_metadata: ~
+#docker相关的  可以删
+#processors:
+#  - add_cloud_metadata: ~
+#  - add_docker_metadata: ~
 
 # 自定义ES的索引需要把ilm设置为false
 #setup.ilm.enabled: false
