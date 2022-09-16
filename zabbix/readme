@@ -1,5 +1,6 @@
 # 默认登录账户  Admin / zabbix
-
+# 原有docker-compose文件 mysql是5.7，启动完初始化后 需要改为8.0
+# 
 # 版本查看 
 [root@localhost zabbix-server]# docker-compose ps 
             Name                           Command               State                 Ports               
