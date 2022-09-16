@@ -1,0 +1,62 @@
+# zabbix-server
+docker run --name mysqldb -t \
+      --hostname mysqldb \
+      --restart=always \
+      -v /etc/localtime:/etc/localtime \
+      -v /home/zabbix-docker/mysql/:/var/lib/mysql \
+      -e MYSQL_DATABASE="zabbix" \
+      -e MYSQL_USER="zabbix" \
+      -e MYSQL_PASSWORD="zabbix" \
+      -e MYSQL_ROOT_PASSWORD="root" \
+      -d mysql:5.7 \
+      --character-set-server=utf8 --collation-server=utf8_bin
+
+docker run --name zabbix-java-gateway -t \
+      --hostname zabbix-java-gateway \
+      --restart=always \
+      -v /etc/localtime:/etc/localtime \
+      -d zabbix/zabbix-java-gateway:centos-4.4.6
+
+docker run --name zabbix-server-mysql -t \
+      --hostname zabbix-server-mysql \
+      --restart=always \
+      -v /etc/localtime:/etc/localtime \
+      -e DB_SERVER_HOST="mysqldb" \
+      -e MYSQL_DATABASE="zabbix" \
+      -e MYSQL_USER="zabbix" \
+      -e MYSQL_PASSWORD="zabbix" \
+      -e MYSQL_ROOT_PASSWORD="root" \
+      -e ZBX_JAVAGATEWAY="zabbix-java-gateway" \
+      --link mysqldb:mysql \
+      --link zabbix-java-gateway:zabbix-java-gateway \
+      -p 10051:10051 \
+      -d zabbix/zabbix-server-mysql:centos-4.4.6
+	  
+docker run --name zabbix-web-nginx-mysql -t \
+      --hostname zabbix-web-nginx-mysql \
+      --restart=always \
+      -v /etc/localtime:/etc/localtime \
+      -e PHP_TZ=Asia/Shanghai \
+      -e DB_SERVER_HOST="mysqldb" \
+      -e MYSQL_DATABASE="zabbix" \
+      -e MYSQL_USER="zabbix" \
+      -e MYSQL_PASSWORD="zabbix" \
+      -e MYSQL_ROOT_PASSWORD="root" \
+      --link mysqldb:mysql \
+      --link zabbix-server-mysql:zabbix-server \
+      -p 80:80 \
+      -d zabbix/zabbix-web-nginx-mysql:centos-4.4.6
+
+
+## zabbix-agent
+yum install -y zabbix-agent
+systemctl enable zabbix-agent
+
+cat /etc/zabbix/zabbix_agentd.conf
+Server=10.12.42.19
+
+ServerActive=10.12.42.19
+Hostname=agent
+
+###########  目前碰到的问题是 不管是docker启动还是docker-compose启动的。添加主机始终未生效 不知道是不是需要物理机 
+# 目前都是虚拟机
