@@ -1,7 +1,7 @@
 # docker run 
 
 
-prometheus
+# prometheus
 docker run -itd --name prometheus -p 9090:9090 \
 -v /home/prom/prometheus.yml:/etc/prometheus/prometheus.yml \
 -v /home/prom/rules:/etc/prometheus/rules \
