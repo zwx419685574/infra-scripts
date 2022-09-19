@@ -4,6 +4,7 @@
 prometheus
 docker run -itd --name prometheus -p 9090:9090 \
 -v /home/prom/prometheus.yml:/etc/prometheus/prometheus.yml \
+-v /home/prom/rules:/etc/prometheus/rules \
 -v /etc/localtime:/etc/localtime:ro  prom/prometheus
 
 /prometheus $ prometheus --version 
@@ -15,3 +16,12 @@ prometheus, version 2.37.1 (branch: HEAD, revision: 1ce2197e7f9e95089bfb95cb6176
 
 
 # granfana
+
+
+
+# alertmanager
+docker run -dit -p 9093:9093 --name alertmanager \
+-v /home/alert/alertmanager.yml:/etc/alertmanager/alertmanager.yml \
+-v /home/alert/data:/alertmanager prom/alertmanager
+
+
