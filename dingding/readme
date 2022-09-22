@@ -11,3 +11,17 @@ curl 'https://oapi.dingtalk.com/robot/send?access_token=d186be74615993739ec3d48b
 Alertmanager使用钉钉的方式是使用基于webhook的方式来扩展的，需要通过Webhook转换器与钉钉机器人进行集成，从而通过钉钉接收告警信息。
 alert --> webhook(转换器) --> webhook-dispatcher(web端配置) --> 钉钉 
 
+alert里配置:
+receivers:
+- name: 'webhook'
+  webhook_configs:
+  - url: 'http://localhost:8060/dingtalk/webhook/send'
+    send_resolved: true
+
+webhook里配置:
+targets:
+  webhook:
+   url: http://localhost:7006/dispatcher?access_token=1234567890
+  
+ webhook-dispatcher里页面配置钉钉
+ 
