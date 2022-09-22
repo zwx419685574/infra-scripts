@@ -3,7 +3,11 @@
 # 用python脚本生成 timestamp和sign
 # curl命令测试 
 
+手动测试
 curl 'https://oapi.dingtalk.com/robot/send?access_token=d186be74615993739ec3d48b39e44dd72597d59cf7ad188fb428a8823c97db61&timestamp=1663724244910&sign=kS2YEHwB5FG6asgWQyhlx%2BJrL0II%2BOrX2KLVrtFuaCw%3D' \
  -H 'Content-Type: application/json' \
  -d '{"msgtype": "text","text": {"content":"TEST-TEST可以忽略"}}'
+
+Alertmanager使用钉钉的方式是使用基于webhook的方式来扩展的，需要通过Webhook转换器与钉钉机器人进行集成，从而通过钉钉接收告警信息。
+alert --> webhook(转换器) --> webhook-dispatcher(web端配置) --> 钉钉 
 
