@@ -28,3 +28,5 @@ docker exec -it --user root <container id> bash
 # Jenkins迁移问题
 1 node节点的流水线丢失 查原因 github插件问题
 2 scp 拷贝JENKINS_HOME ，如果有前端软连接方式，scp丢失软连接。需要用rsync
+  
+  rsync -av 原路径 目标路径
