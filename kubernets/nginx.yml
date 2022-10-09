@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web
+        image: nginx
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 200m
+            memory: 200Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 2000
+            memory: 2Gi
+            ephemeral-storage: 5Gi
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          name: nginxconf
+          subPath: nginx.conf
+      volumes:
+      - name: nginxconf
+        configMap:
+          name: nginxconf
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginxconf
+data:
+  nginx.conf: |
+    worker_processes  1;
+    events {
+        worker_connections  1024;
+    }
+    http {
+        include       mime.types;
+        default_type  application/octet-stream;
+        client_max_body_size 50m;
+        sendfile        on;
+        keepalive_timeout  65;
+        server {
+            listen       80;
+            server_name  localhost;
+            root   /usr/share/nginx/html;
+            location / {
+               index  index.html index.htm;
+            }
+        }
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    name: web
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30500
+  selector:
+    app: web
