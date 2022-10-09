@@ -1,1 +1,45 @@
-## 
+关闭防火墙
+systemctl stop firewalld
+systemctl disable firewalld
+关闭selinux
+sed -i 's/enforcing/disabled/' /etc/selinux/config
+setenforce 0
+关闭swap
+swapoff -a # 临时关闭
+sed -ri 's/.*swap.*/#&/' /etc/fstab #永久关闭
+
+echo "1" >/proc/sys/net/bridge/bridge-nf-call-iptables
+
+cat >> /etc/sysctl.conf<<EOF
+   net.ipv4.ip_forward=1
+   net.bridge.bridge-nf-call-iptables=1
+   net.bridge.bridge-nf-call-ip6tables=1
+   vm.swappiness=0
+    vm.max_map_count=655360
+EOF
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+
+yum install -y kubelet-1.20.1 kubeadm-1.20.1 kubectl-1.20.1
+
+
+systemctl enable kubelet;systemctl start kubelet 　　
+#此时启动不成功正常，初始化后有配置文件了就启动了
+
+卸载
+yum remove  -y kubelet kubeadm kubectl
+
+kubeadm init --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap --kubernetes-version 1.20.1
+
+初始化后所有节点始终是notready
+修改以下配置 重启kubelet
+cat /var/lib/kubelet/kubeadm-flags.env
+KUBELET_KUBEADM_ARGS="--pod-infra-container-image=k8s.gcr.io/pause:3.2"
