@@ -1,0 +1,5 @@
+版本对应参考
+https://github.com/kubernetes/dashboard/releases
+
+本示例k8s 1.20.1 对应dashboard版本 2.4.0
+https://raw.githubusercontent.com/kubernetes/dashboard/v2.4.0/aio/deploy/recommended.yaml
