@@ -5,6 +5,7 @@
 docker run -itd --name prometheus -p 9090:9090 \
 -v /home/prom/prometheus.yml:/etc/prometheus/prometheus.yml \
 -v /home/prom/rules:/etc/prometheus/rules \
+-v /home/prom/prometheus:/prometheus \
 -v /etc/localtime:/etc/localtime:ro  prom/prometheus
 
 /prometheus $ prometheus --version 
