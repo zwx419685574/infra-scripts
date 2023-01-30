@@ -29,6 +29,19 @@ cd bin ; elasticsearch-setup-passwords interactive
 
 # ELK Kibana 8.3.2登录认证 : https://www.cnblogs.com/feifei6779/p/16524927.html
 3 kibana
+  配置文件里需要单独配用户 还需要分组 https://www.cnblogs.com/feifei6779/p/16524927.html
+  #增加授权：
+  #superuser能正常打开es的9200端口，kibana_system配置后才可以正常对接kb和es
+  fei@fei:~$ sudo /usr/share/elasticsearch/bin/elasticsearch-users roles -a superuser logadmin
+  fei@fei:~$ sudo /usr/share/elasticsearch/bin/elasticsearch-users roles -a kibana_system logadmin
+
+  #移除授权：
+  fei@fei:~$ sudo /usr/share/elasticsearch/bin/elasticsearch-users roles -r kibana_admin logadmin
+
+  #查看授权：
+  fei@fei:~$ sudo /usr/share/elasticsearch/bin/elasticsearch-users roles -v logadmin
+  logadmin       : kibana_system,superuser
+
 docker run --name kibana --restart=always \
 -v /mnt/kibdata/config:/usr/share/kibana/config \
 -v /mnt/kibdata/logs:/usr/share/kibana/logs \
